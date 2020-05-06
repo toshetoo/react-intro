@@ -11,12 +11,12 @@ class Layout extends React.Component {
             count: 0
         };
 
-        setInterval(() => {
-            let newCount = this.state.count + 1;
-            this.setState({
-                count: newCount 
-            });
-        }, 1000);
+        // setInterval(() => {
+        //     let newCount = this.state.count + 1;
+        //     this.setState({
+        //         count: newCount 
+        //     });
+        // }, 1000);
     }
 
     render() {
