@@ -3,3 +3,12 @@
     width: 300px;
     margin: 10px;
 }
+
+.picture-holder {
+    position: relative;
+}
+
+.edit-icon {
+    position: absolute;
+    right: 15px;
+}
