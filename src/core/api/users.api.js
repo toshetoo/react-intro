@@ -35,6 +35,10 @@ export async function login(userData) {
 
     const loggedUser = users.find(u => u.email === userData.email && u.password.toString() === userData.password);
 
+    if (!loggedUser.isActive) {
+        throw new Error('The current user has been blocked!');
+    }
+
     if (loggedUser) {
         localStorage.setItem('loggedUser', JSON.stringify(loggedUser));
         return;
@@ -47,6 +51,15 @@ export function logout() {
     localStorage.removeItem('loggedUser');
 }
 
-export function editUser(userData) {
-    return axios.put(`${apiUrl}/users/${userData.id}`, userData);
+export function saveUser(userData) {
+    if (userData.id) {
+        return axios.put(`${apiUrl}/users/${userData.id}`, userData);
+    }
+
+    return register(userData);
+    
+}
+
+export function deleteUser(id) {
+    return axios.delete(`${apiUrl}/users/${id}`);
 }

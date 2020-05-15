@@ -12,13 +12,13 @@
     },
     {
       "id": "5ea2b9a9d9c1618573cd5c08",
-      "isActive": false,
+      "isActive": true,
       "isAdmin": true,
       "picture": "https://picsum.photos/200/300",
-      "age": 32,
+      "age": "3243",
       "name": "Roxanne Santiago",
-      "email": "roxannesantiago@reversus.com",
-      "password": 12345
+      "email": "admin@admin.com",
+      "password": "mypass"
     },
     {
       "id": "5ea2b9a94a1b7d4eb605131e",
@@ -41,35 +41,41 @@
       "password": 12345
     },
     {
-      "id": "5ea2b9a9276e554ba2bbdbca",
-      "isActive": true,
+      "name": "Test create",
+      "age": "10",
+      "email": "fdasfdsafsd@admin.com",
+      "password": "mypass324231",
       "isAdmin": false,
-      "picture": "https://picsum.photos/200/300?random=1",
-      "age": 25,
-      "name": "Abby Mclean",
-      "email": "abbymclean@reversus.com",
-      "password": 12345
+      "isActive": "on",
+      "id": "WJ5lKnY"
     },
     {
-      "id": "5ea2b9a9be917268138872cd",
-      "isActive": true,
+      "name": "gsfdgfsdg sf",
+      "age": "34",
+      "email": "admifdsafdsafasdfn@admin.com",
+      "password": "mypass",
       "isAdmin": false,
-      "picture": "https://picsum.photos/200/300?random=1",
-      "age": 34,
-      "name": "Brenda Goff",
-      "email": "brendagoff@reversus.com",
-      "password": 12345
-    },
-    {
-      "name": "gfsdgdfsgfdsg",
-      "email": "afsdfdmin@admfdsfdsin.com",
-      "password": "mypass21321",
-      "age": "42343",
       "isActive": true,
-      "isAdmin": false,
       "picture": "https://picsum.photos/200/300?random=1",
-      "id": "pgPqcuU"
+      "id": "dR5vnt5"
     }
   ],
-  "notes": []
+  "notes": [
+    {
+      "id": "dR5gfdvnt5",
+      "title": "Test title",
+      "content": "Test cointent",
+      "authorId": "dR5vnt5",
+      "authorName": "gsfdgfsdg sf",
+      "date": "234324:432432:432"
+    },
+    {
+      "title": "My first post kfjadshfkj asd kjfhsdjnfsd",
+      "content": "fadsfdas fads fsad fvcxb vcbfds gfdso jigfjdlksjgkoldf fadsfdas fads fsad fvcxb vcbfds gfdso jigfjdlksjgkoldffadsfdas fads fsad fvcxb vcbfds gfdso jigfjdlksjgkoldffadsfdas fads fsad fvcxb vcbfds gfdso jigfjdlksjgkoldffadsfdas fads fsad fvcxb vcbfds gfdso jigfjdlksjgkoldffadsfdas fads fsad fvcxb vcbfds gfdso jigfjdlksjgkoldffadsfdas fads fsad fvcxb vcbfds gfdso jigfjdlksjgkoldf",
+      "authorId": "5ea2b9a9d9c1618573cd5c08",
+      "authorName": "Roxanne Santiago",
+      "date": "2020-05-15T11:35:26.116Z",
+      "id": "AnTJXov"
+    }
+  ]
 }
