@@ -1,16 +1,33 @@
 import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import { logout } from '../../../core/api/users.api';
 
-export function Header() {
-
+export const Header = withRouter((props) => {
+  console.log('HEADER PROPS +>', props);
   const [isLoggedOut, setLogoutFlag] = useState(false);
+  const [searchParam, setSearchParam] = useState('');
 
   const onLogout = (event) => {
     logout();
     setLogoutFlag(true);
   }
 
+  const onSearchChange = (event) => {
+    event.persist();
+    setSearchParam(event.target.value);
+  }
+
+  const onSearchClick = (event) => {
+    event.preventDefault();
+    const pathNameUrl = props.location.pathname.split('/')[1];
+
+    const historyObj = { pathname: `/${pathNameUrl}` };
+    if (searchParam) {
+      historyObj['search'] = `?q=${searchParam}`;
+    }
+
+    props.history.push(historyObj);
+  }
 
     return (
       <>
@@ -36,11 +53,14 @@ export function Header() {
         <Link to="/notes" className="nav-link">All notes</Link>
       </li>
       <li className="nav-item">
+        <Link to="/notes/my-notes" className="nav-link">My notes</Link>
+      </li>
+      <li className="nav-item">
         <Link to="/notes/create" className="nav-link">Create note</Link>
       </li>
     </ul>
-    <form className="form-inline my-2 my-lg-0">
-      <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+    <form className="form-inline my-2 my-lg-0" onSubmit={onSearchClick}>
+      <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={onSearchChange}/>
       <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
     <span className="logout-btn" onClick={onLogout} >Logout</span>
@@ -49,4 +69,4 @@ export function Header() {
 
 </>
     );
-}
+})

@@ -27,6 +27,14 @@ export function UserEdit(props) {
         }))
     }
 
+    const onCheckBoxChange = (event) => {
+        event.persist();
+        setEditedUser((prevState) => ({
+            ...prevState,
+            [event.target.name]: event.target.checked
+        }))
+    };
+
     const onFormSubmit = (event) => {
         event.preventDefault();
         saveUser(editedUser).then(() => {
@@ -59,11 +67,11 @@ export function UserEdit(props) {
                 </div>
                 <div className="form-group">
                     <label labelfor="isActive">Is Active: </label>
-                    <input type="checkbox" name="isActive" id="isActive" className="form-control" onChange={onInputChange} checked={editedUser.isActive} />
+                    <input type="checkbox" name="isActive" id="isActive" className="form-control" onChange={onCheckBoxChange} checked={editedUser.isActive} />
                 </div>
                 <div className="form-group">
                     <label labelfor="isAdmin">Is Admin: </label>
-                    <input type="checkbox" name="isAdmin" id="isAdmin" className="form-control" onChange={onInputChange} checked={editedUser.isAdmin} />
+                    <input type="checkbox" name="isAdmin" id="isAdmin" className="form-control" onChange={onCheckBoxChange} checked={editedUser.isAdmin} />
                 </div>
                 <button className="btn btn-success">Save user</button>
             </form>

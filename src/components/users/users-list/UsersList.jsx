@@ -4,16 +4,17 @@ import { UserCard } from '../user-card/UserCard';
 
 const currentUser = getLoggedUser();
 
-export function UsersList() {
-
+export function UsersList(props) {
+    console.log(props);
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        getAllUsers().then((allUsers) => {
+        const searchParam = props.location.search.split('=')[1];
+        getAllUsers(searchParam).then((allUsers) => {
             console.log(allUsers);
-            setUsers(allUsers.data.filter(u => u.id !== currentUser.id));
+            setUsers(allUsers.filter(u => u.id !== currentUser.id));
         });
-    }, []);
+    }, [props.location.search]);
 
     const onUserDelete = (id) => {
         deleteUser(id).then(() => {

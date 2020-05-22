@@ -1,16 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getLoggedUser } from '../../../core/api/users.api';
 
 const noteCardStyle = {
     maxWidth: '18rem'
 };
 
-export function NoteCard({ note }) {
+const deleteBtnStyles = {
+    cursor: 'pointer'
+};
+
+export function NoteCard({ note, onDeleteClick }) {
+    const loggedUser = getLoggedUser();
+
     return (
     <div className="card text-white bg-secondary mb-3" style={noteCardStyle}>
         <div className="card-header">
             {note.title}
-            <Link to={`/notes/edit/${note.id}`} > Edit </Link>
+            { (loggedUser.isAdmin || loggedUser.id === note.authorId) && <Link to={`/notes/edit/${note.id}`} > Edit </Link> }
+    { (loggedUser.isAdmin || loggedUser.id === note.authorId) && <span style={deleteBtnStyles} onClick={() => onDeleteClick(note.id)}>Delete</span> }
         </div>
         <div className="card-body">
             <p className="card-text">{note.content}</p>

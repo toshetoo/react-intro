@@ -11,6 +11,18 @@ export function getNoteById(id) {
     return axios.get(`${apiUrl}/notes/${id}`);
 }
 
+export async function getNotesByAuthorId(authorId) {
+    const allNotes = (await getAllNotes()).data;
+
+    return allNotes.filter(note => note.authorId === authorId);
+}
+
+export function getMyNotes() {
+    const loggedUserId = getLoggedUser().id;
+    
+    return getNotesByAuthorId(loggedUserId);
+}
+
 export function saveNote(noteData) {
     const loggedUser = getLoggedUser();
 
@@ -23,4 +35,16 @@ export function saveNote(noteData) {
     noteData.date = new Date();
 
     return axios.post(`${apiUrl}/notes`, noteData);
+}
+
+export function deleteNote(id) {
+    return axios.delete(`${apiUrl}/notes/${id}`);
+}
+
+export async function deleteNotesForAuthor(authorId) {
+    const notes = await getNotesByAuthorId(authorId);
+
+    notes.forEach(note => {
+        deleteNote(note.id);
+    });
 }

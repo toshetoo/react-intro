@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { deleteNotesForAuthor } from './notes.api';
 
 const apiUrl = "http://localhost:3005";
 
@@ -6,8 +7,13 @@ export function getLoggedUser() {
     return JSON.parse(localStorage.getItem('loggedUser'));
 }
 
-export function getAllUsers() {
-    return axios.get(`${apiUrl}/users`);
+export async function getAllUsers(params) {
+    const allUsers = (await axios.get(`${apiUrl}/users`)).data;
+    
+    if (!params)
+        return allUsers;
+    const lowerParam = params.toLowerCase();
+    return allUsers.filter(user => user.name.toLowerCase().includes(lowerParam) || user.email.toLowerCase().includes(lowerParam));
 }
 
 export function getUserById(id) {
@@ -15,7 +21,7 @@ export function getUserById(id) {
 }
 
 export async function register(userData) {
-    const users = (await getAllUsers()).data;
+    const users = await getAllUsers();
 
     if (users.find(u => u.email === userData.email)) {
         throw new Error('Email already exists!');
@@ -31,7 +37,7 @@ export async function register(userData) {
 }
 
 export async function login(userData) {
-    const users = (await getAllUsers()).data;
+    const users = await getAllUsers();
 
     const loggedUser = users.find(u => u.email === userData.email && u.password.toString() === userData.password);
 
@@ -61,5 +67,6 @@ export function saveUser(userData) {
 }
 
 export function deleteUser(id) {
+    deleteNotesForAuthor(id);
     return axios.delete(`${apiUrl}/users/${id}`);
 }

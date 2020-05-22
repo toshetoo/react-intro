@@ -6,6 +6,7 @@ import { AuthenticatedRoute } from '../../../core/guards/AuthenticatedRoute';
 import { UserEdit } from '../../users/user-edit/UserEdit';
 import { NotesList } from '../../notes/notes-list/NotesList';
 import { NoteEdit } from '../../notes/edit/NoteEdit';
+import { MyNotes } from '../../notes/my-notes/MyNotes';
 
 export function Main({ count }) {    
     return (
@@ -17,6 +18,7 @@ export function Main({ count }) {
                 <AuthenticatedRoute exact path="/users/edit/:id" admin={true} component={UserEdit} /> 
 
                 <AuthenticatedRoute exact path="/notes" component={NotesList} />
+                <AuthenticatedRoute exact path="/notes/my-notes" component={MyNotes} />
                 <AuthenticatedRoute exact path="/notes/create" component={NoteEdit} />
                 <AuthenticatedRoute exact path="/notes/edit/:id" component={NoteEdit} />
              </Switch>

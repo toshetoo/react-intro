@@ -1,16 +1,6 @@
 {
   "users": [
     {
-      "id": "5ea2b9a998eba1677821f94c",
-      "isActive": false,
-      "isAdmin": true,
-      "picture": "https://picsum.photos/200/300",
-      "age": "273",
-      "name": "Salas Villarrealsgsdf gdfsg s",
-      "email": "admin@gggggg.com",
-      "password": "mypass"
-    },
-    {
       "id": "5ea2b9a9d9c1618573cd5c08",
       "isActive": true,
       "isAdmin": true,
@@ -22,13 +12,13 @@
     },
     {
       "id": "5ea2b9a94a1b7d4eb605131e",
-      "isActive": false,
+      "isActive": true,
       "isAdmin": true,
       "picture": "https://picsum.photos/200/300",
       "age": 40,
       "name": "Steele Anderson",
-      "email": "steeleanderson@reversus.com",
-      "password": 12345
+      "email": "admin@admin1.com",
+      "password": "mypass"
     },
     {
       "id": "5ea2b9a939bbad67b304814f",
@@ -60,22 +50,5 @@
       "id": "dR5vnt5"
     }
   ],
-  "notes": [
-    {
-      "id": "dR5gfdvnt5",
-      "title": "Test title",
-      "content": "Test cointent",
-      "authorId": "dR5vnt5",
-      "authorName": "gsfdgfsdg sf",
-      "date": "234324:432432:432"
-    },
-    {
-      "title": "My first post kfjadshfkj asd kjfhsdjnfsd",
-      "content": "fadsfdas fads fsad fvcxb vcbfds gfdso jigfjdlksjgkoldf fadsfdas fads fsad fvcxb vcbfds gfdso jigfjdlksjgkoldffadsfdas fads fsad fvcxb vcbfds gfdso jigfjdlksjgkoldffadsfdas fads fsad fvcxb vcbfds gfdso jigfjdlksjgkoldffadsfdas fads fsad fvcxb vcbfds gfdso jigfjdlksjgkoldffadsfdas fads fsad fvcxb vcbfds gfdso jigfjdlksjgkoldffadsfdas fads fsad fvcxb vcbfds gfdso jigfjdlksjgkoldf",
-      "authorId": "5ea2b9a9d9c1618573cd5c08",
-      "authorName": "Roxanne Santiago",
-      "date": "2020-05-15T11:35:26.116Z",
-      "id": "AnTJXov"
-    }
-  ]
+  "notes": []
 }
