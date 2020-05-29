@@ -44,6 +44,14 @@ export function NoteEdit(props) {
                     <label labelfor="content">Content: </label>
                     <textarea className="form-control" id="content" name="content" onChange={onInputChange} value={currentNote.content} />
                 </div>
+                <div className="form-group">
+                    <label labelfor="status">Status: </label>
+                    <select className="form-control" id="status" name="status" onChange={onInputChange} value={currentNote.status}>
+                        <option value="Active">Active</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Done">Done</option>
+                    </select>
+                </div>
                 <button className="btn btn-primary">Save note</button>
             </form>
         </div>

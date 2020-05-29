@@ -7,6 +7,7 @@ export function UserEdit(props) {
     console.log(props);
 
     const [editedUser, setEditedUser] = useState({name: '', age: 0, email: '', password: '', isAdmin: false, isActive: false });
+    const [error, setError] = useState('');
     const [shouldRedirect, setShouldRedirect] = useState(false);
 
     useEffect(() => {
@@ -24,7 +25,11 @@ export function UserEdit(props) {
         setEditedUser((prevState) => ({
             ...prevState,
             [event.target.name]: event.target.value
-        }))
+        }));
+
+        if (error) {
+            setError('');
+        }
     }
 
     const onCheckBoxChange = (event) => {
@@ -33,6 +38,10 @@ export function UserEdit(props) {
             ...prevState,
             [event.target.name]: event.target.checked
         }))
+
+        if (error) {
+            setError('');
+        }
     };
 
     const onFormSubmit = (event) => {
@@ -41,14 +50,15 @@ export function UserEdit(props) {
             console.log('SUCCESS');
             setShouldRedirect(true);
         })
-        .catch((err) => console.error(err))
+        .catch((err) => setError(err.message));
     }
 
     return (
         <>
         { shouldRedirect && <Redirect to='/users' /> }
-        <div className="user-edit-wrapper">
+        <div className="user-edit-wrapper">            
             <form className="user-edit-form" onSubmit={onFormSubmit}>
+            { error && <span className="text-danger">{error}</span> }
                 <div className="form-group">
                     <label labelfor="name">Name: </label>
                     <input type="text" name="name" id="name" className="form-control" onChange={onInputChange} value={editedUser.name} />

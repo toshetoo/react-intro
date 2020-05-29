@@ -1,26 +1,38 @@
 import axios from 'axios';
 import { getLoggedUser } from './users.api';
 
-const apiUrl = 'http://localhost:3005'
+const apiUrl = 'http://localhost:3005';
 
-export function getAllNotes() {
-    return axios.get(`${apiUrl}/notes`);
+export const NoteStatus = {
+    Active: 'Active',
+    Pending: 'Pending',
+    Done: 'Done'
+}
+
+export async function getAllNotes(searchParam) {
+    const allNotes = (await axios.get(`${apiUrl}/notes`)).data;
+
+    if (!searchParam)
+        return allNotes;
+
+    const loweredParam = searchParam.toLowerCase();
+    return allNotes.filter(note => note.title.toLowerCase().includes(loweredParam) || note.content.toLowerCase().includes(loweredParam));
 }
 
 export function getNoteById(id) {
     return axios.get(`${apiUrl}/notes/${id}`);
 }
 
-export async function getNotesByAuthorId(authorId) {
-    const allNotes = (await getAllNotes()).data;
+export async function getNotesByAuthorId(authorId, searchParam) {
+    const allNotes = await getAllNotes(searchParam);
 
     return allNotes.filter(note => note.authorId === authorId);
 }
 
-export function getMyNotes() {
+export function getMyNotes(searchParam) {
     const loggedUserId = getLoggedUser().id;
     
-    return getNotesByAuthorId(loggedUserId);
+    return getNotesByAuthorId(loggedUserId, searchParam);
 }
 
 export function saveNote(noteData) {
@@ -33,6 +45,8 @@ export function saveNote(noteData) {
     noteData.authorId = loggedUser.id;
     noteData.authorName = loggedUser.name;
     noteData.date = new Date();
+    if (!noteData.status)
+        noteData.status = NoteStatus.Active;
 
     return axios.post(`${apiUrl}/notes`, noteData);
 }

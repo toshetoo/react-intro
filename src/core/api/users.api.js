@@ -41,7 +41,7 @@ export async function login(userData) {
 
     const loggedUser = users.find(u => u.email === userData.email && u.password.toString() === userData.password);
 
-    if (!loggedUser.isActive) {
+    if (loggedUser && !loggedUser.isActive) {
         throw new Error('The current user has been blocked!');
     }
 

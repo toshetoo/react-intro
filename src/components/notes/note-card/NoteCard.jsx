@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getLoggedUser } from '../../../core/api/users.api';
+import { NoteStatus } from './../../../core/api/notes.api';
 
 const noteCardStyle = {
     maxWidth: '18rem'
@@ -13,8 +14,24 @@ const deleteBtnStyles = {
 export function NoteCard({ note, onDeleteClick }) {
     const loggedUser = getLoggedUser();
 
+    let noteClassByType = "card text-white m-3 ";
+    switch(note.status) {
+        case NoteStatus.Active: 
+            noteClassByType += "bg-primary";
+        break;
+        case NoteStatus.Done: 
+            noteClassByType += "bg-success";
+        break;
+        case NoteStatus.Pending:
+            noteClassByType += "bg-secondary";
+        break;
+        default: 
+            noteClassByType += "bg-primary";
+        break;
+    }
+
     return (
-    <div className="card text-white bg-secondary mb-3" style={noteCardStyle}>
+    <div className={noteClassByType} style={noteCardStyle}>
         <div className="card-header">
             {note.title}
             { (loggedUser.isAdmin || loggedUser.id === note.authorId) && <Link to={`/notes/edit/${note.id}`} > Edit </Link> }

@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { Link, Redirect, withRouter } from 'react-router-dom';
 import { logout } from '../../../core/api/users.api';
 
+const logoutStyle = {
+  cursor: 'pointer'
+};
+
 export const Header = withRouter((props) => {
   console.log('HEADER PROPS +>', props);
   const [isLoggedOut, setLogoutFlag] = useState(false);
@@ -19,7 +23,7 @@ export const Header = withRouter((props) => {
 
   const onSearchClick = (event) => {
     event.preventDefault();
-    const pathNameUrl = props.location.pathname.split('/')[1];
+    const pathNameUrl = props.location.pathname.substr(1);
 
     const historyObj = { pathname: `/${pathNameUrl}` };
     if (searchParam) {
@@ -63,7 +67,7 @@ export const Header = withRouter((props) => {
       <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={onSearchChange}/>
       <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-    <span className="logout-btn" onClick={onLogout} >Logout</span>
+    <span className="logout-btn ml-2" style={logoutStyle} onClick={onLogout} >Logout</span>
   </div>
 </nav>
 
