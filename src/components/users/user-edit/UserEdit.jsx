@@ -1,31 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import './UserEdit.css';
-import { getUserById, saveUser } from '../../../core/api/users.api';
 import { Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { editUser, fetchUserById, saveUserInAPI } from '../../../core/actions/user-actions';
 
 export function UserEdit(props) {
     console.log(props);
+    const dispatch = useDispatch();
+    const editedUser = useSelector(state => state.user);
 
-    const [editedUser, setEditedUser] = useState({name: '', age: 0, email: '', password: '', isAdmin: false, isActive: false });
+
     const [error, setError] = useState('');
     const [shouldRedirect, setShouldRedirect] = useState(false);
 
     useEffect(() => {
         if (props.computedMatch.params.id) {
-            getUserById(props.computedMatch.params.id).then((currentUser) => {
-                console.log(currentUser);
-                setEditedUser(currentUser.data);
-            });
+            dispatch(fetchUserById(props.computedMatch.params.id));
         }        
-    }, [props.computedMatch.params.id]);
+    }, [props.computedMatch.params.id, dispatch]);
 
     const onInputChange = (event) => {
         event.persist();
-        
-        setEditedUser((prevState) => ({
-            ...prevState,
-            [event.target.name]: event.target.value
-        }));
+        dispatch(editUser({ [event.target.name]: event.target.value }));
 
         if (error) {
             setError('');
@@ -34,10 +30,7 @@ export function UserEdit(props) {
 
     const onCheckBoxChange = (event) => {
         event.persist();
-        setEditedUser((prevState) => ({
-            ...prevState,
-            [event.target.name]: event.target.checked
-        }))
+        dispatch(editUser({ [event.target.name]: event.target.checked }));
 
         if (error) {
             setError('');
@@ -46,11 +39,12 @@ export function UserEdit(props) {
 
     const onFormSubmit = (event) => {
         event.preventDefault();
-        saveUser(editedUser).then(() => {
-            console.log('SUCCESS');
-            setShouldRedirect(true);
-        })
-        .catch((err) => setError(err.message));
+        dispatch(saveUserInAPI(editedUser));
+        // saveUser(editedUser).then(() => {
+        //     console.log('SUCCESS');
+        //     setShouldRedirect(true);
+        // })
+        // .catch((err) => setError(err.message));
     }
 
     return (

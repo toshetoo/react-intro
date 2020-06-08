@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { getAllUsers, deleteUser, getLoggedUser } from './../../../core/api/users.api';
+import React, { useEffect } from 'react';
 import { UserCard } from '../user-card/UserCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllUsersFromAPI, deleteUserFromAPI } from './../../../core/actions/user-actions';
 
-const currentUser = getLoggedUser();
 const usersListStyle = {
     flexWrap: 'wrap'
 };
@@ -17,7 +15,7 @@ export function UsersList(props) {
 
     useEffect(() => {
         const searchParam = props.location.search.split('=')[1];
-        dispatch(fetchAllUsersFromAPI());
+        dispatch(fetchAllUsersFromAPI(searchParam));
     }, [props.location.search, dispatch]);
 
     const onUserDelete = (id) => {
